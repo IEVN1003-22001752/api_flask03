@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+{% import "_macros.html" as macro %}
+
+<div class="contenedor">
+    <form action="" method="post" novalidate>
+        <!-- Fila 1: Datos del cliente -->
+        <div class="fila">
+            <div class="tarjeta" style="width: 100%;">
+                <h3>Datos del cliente</h3>
+                <div style="display: flex; gap: 15px; width: 100%;">
+                    <div style="flex: 1;">{{macro.campoNuevo(form.nombre)}}</div>
+                    <div style="flex: 1;">{{macro.campoNuevo(form.direccion)}}</div>
+                    <div style="flex: 1;">{{macro.campoNuevo(form.telefono)}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila 2: Tamaño, Ingredientes y Número -->
+        <div class="fila">
+            <div class="tarjeta">
+                <h3>Tamaño de la pizza</h3>
+                <label><input type="radio" name="tamaño" value="Chica"> Chica $40</label>
+                <label><input type="radio" name="tamaño" value="Mediana"> Mediana $80</label>
+                <label><input type="radio" name="tamaño" value="Grande"> Grande $120</label>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Ingredientes</h3>
+                <label><input type="checkbox" name="ingredientes" value="Jamon"> Jamón $10</label>
+                <label><input type="checkbox" name="ingredientes" value="Piña"> Piña $10</label>
+                <label><input type="checkbox" name="ingredientes" value="Champiñones"> Champiñones $10</label>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Número de pizzas</h3>
+                {{macro.campoNuevo(form.numeroPizzas)}}
+                <button type="submit">Agregar</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Fila 3: Tabla y Totales -->
+    <div class="fila">
+        <div class="tarjeta">
+            <h3>Ventas</h3>
+            <div class="relative overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tamaño</th>
+                            <th>Ingredientes</th>
+                            <th>Número</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{tamaño}}</td>
+                            <td>{{ingredientes}}</td>
+                            <td>{{numeroPizzas}}</td>
+                            <td>${{total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tarjeta totales">
+            <h4>Ventas del día</h4>
+            <h2>{{nombre}} Total: ${{total}}</h2>
+            <h2>Ventas totales del día: ${{totalDia}}</h2>
+            <form action="/get_coockies" method="get" novalidate>
+                <button type="submit" class="btn-secondary">Ver cookies</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Tus estilos sin cambio */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff8f0;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+    h1 { text-align: center; color: #d32f2f; margin: 20px 0; font-size: 2.2rem; }
+    .contenedor { width: 100%; height: 100%; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 25px; }
+    .fila { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; width: 100%; }
+    .tarjeta { background-color: #fff; border-radius: 15px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); padding: 20px; flex: 1; min-width: 300px; }
+    h3, h4 { color: #e53935; margin-bottom: 10px; }
+    form { display: flex; flex-direction: column; gap: 10px; }
+    input[type="text"], input[type="number"], input[type="tel"] { padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; width: 100%; }
+    input[type="radio"], input[type="checkbox"] { margin-right: 8px; transform: scale(1.1); }
+    label { font-size: 1rem; color: #555; margin-right: 10px; }
+    button { background-color: #ff7043; color: #fff; border: none; border-radius: 8px; padding: 10px 15px; cursor: pointer; font-size: 1rem; transition: background 0.3s; width: fit-content; }
+    button:hover { background-color: #e64a19; }
+    .btn-secondary { background-color: #757575; }
+    .btn-secondary:hover { background-color: #616161; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; background-color: #fff; }
+    th, td { padding: 12px; border-bottom: 1px solid #ddd; }
+    thead { background-color: #ffe0b2; }
+    tbody tr:hover { background-color: #fff3e0; }
+    .totales { display: flex; flex-direction: column; gap: 10px; text-align: center; }
+    .totales h2 { color: #2e7d32; }
+    @media (max-width: 900px) { .fila { flex-direction: column; } }
+</style>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% import "_macros.html" as macro %}
+
+<h1>Figuras</h1>
+<form class="form-control" action="" method="post" novalidate>
+    {{macro.campoNuevo(form.triangulo)}}
+    {{macro.campoNuevo(form.cuadrado)}}
+    {{macro.campoNuevo(form.circulo)}}
+    {{macro.campoNuevo(form.pentagono)}}
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<h2>Triangulo: {{tri}}</h2>
+<h2>Cuadrado: {{cua}}</h2>
+<h2>Circulo: {{cir}}</h2>
+<h2>Pentagono: {{pen}}</h2>
+
+
+
+{% endblock %}

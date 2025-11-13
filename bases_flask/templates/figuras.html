@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% import "_macros.html" as macro %}
+<h1>Figuras</h1>
+
+<form method="post">
+{{macro.campoNuevo(form.X1)}}
+{{macro.campoNuevo(form.X2)}}
+
+<input type="radio" name="figura" value="Triangulo"> Triángulo
+<label for="">Triangulo</label>
+<input type="radio" name="figura" value="Cuadrado"> Cuadrado
+<label for="">Cuadrado</label>
+<input type="radio" name="figura" value="Circulo"> Círculo
+<label for="">Circulo</label>
+<input type="radio" name="figura" value="Pentagono"> Pentágono
+<label for="">Pentágono</label>
+
+<button type="submit">Calcular</button>
+</form>
+
+<h2>Resultado: {{ res }}</h2>
+{% endblock %}
